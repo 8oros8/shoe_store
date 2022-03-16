@@ -1,0 +1,34 @@
+<template>
+  <button class="basicButton">
+    В корзину
+  </button>
+</template>
+
+<script>
+export default {
+  name: "Button",
+}
+</script>
+
+<style scoped>
+.basicButton {
+  width: 80%;
+  height: 48px;
+  background-color: #33A0FF;
+  color: #FFFFFF;
+  border-radius: 4px;
+  border-width: 0;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+}
+.basicButton:hover {
+  cursor: pointer;
+  background-color: #1E96FF;
+}
+.basicButton:active {
+  cursor: pointer;
+  background-color: #1985E3;
+}
+</style>
