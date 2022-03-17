@@ -11,11 +11,13 @@
       </div>
     </div>
     <div class="menuWrapper">
-      <div class="menuItem">ГЛАВНАЯ</div>
-      <div class="menuItem">КАТАЛОГ</div>
-      <div class="menuItem">ДОСТАВКА И ОПЛАТА</div>
-      <div class="menuItem">О НАС</div>
-      <div class="menuItem">КОНТАКТЫ</div>
+      <div class="menu">
+        <div class="menuItem">ГЛАВНАЯ</div>
+        <div class="menuItem">КАТАЛОГ</div>
+        <div class="menuItem">ДОСТАВКА И ОПЛАТА</div>
+        <div class="menuItem">О НАС</div>
+        <div class="menuItem">КОНТАКТЫ</div>
+      </div>
     </div>
   </div>
 </template>
@@ -76,9 +78,13 @@ export default {
   height: 100%;
 }
 .menuWrapper {
-  display: flex;
   width: 100%;
+  margin-top: 29px;
+}
+.menu {
+  display: flex;
   justify-content: space-between;
+  margin-right: 12%;
 }
 .menuItem {
   display: flex;

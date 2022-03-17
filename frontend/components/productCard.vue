@@ -32,6 +32,7 @@ export default {
   align-items: center;
   width: 30%;
   margin-top: 4%;
+  padding-bottom: 24px;
   background-color: #FFFFFF;
   box-shadow: 0 0 35px rgba(125, 137, 171, 0.15);
   border-radius: 7px;
