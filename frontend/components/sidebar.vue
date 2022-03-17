@@ -1,19 +1,30 @@
 <template>
   <div class="categoriesSidebar">
-    <div class="currentCategory">Текущая категория</div>
-      Категории
-      <div class="categoriesItem">Ботинки</div>
-      <div class="categoriesItem">Ботинки</div>
-      <div class="categoriesItem">Сапоги</div>
-      <div class="categoriesItem">Ботинки</div>
-      <div class="categoriesItem">Ботинки</div>
-      <div class="categoriesItem">Ботинки</div>
+    <div class="currentCategory"> {{ currentCategory }}</div>
+    <div class="categoriesHeader">Категории</div>
+    <div class="categoryItem" v-for="category in categories" v-bind:class="{active: category.message === currentCategory}" @click="currentCategory = category.message; category.isActive = !category.isActive;"> {{ category.message }}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Sidebar"
+  name: "Sidebar",
+  data() {
+    return {
+      currentCategory: 'Ботинки',
+      categories: [
+        { message: 'Сапоги'  },
+        { message: 'Кроссовки'  },
+        { message: 'Сапоги'  },
+        { message: 'Ботинки'  },
+        { message: 'Сапоги'  },
+        { message: 'Сапоги'  }
+      ]
+    }
+  },
+  methods: {
+
+  }
 }
 </script>
 
@@ -22,5 +33,39 @@ export default {
   display: flex;
   flex-direction: column;
   width: 19%;
+  margin-right: 194px;
+}
+.currentCategory {
+  display: flex;
+  width: 120px;
+  height: 40px;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  color: #282A2C;
+}
+.categoriesHeader {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 37px;
+  margin-bottom: 24px;
+}
+.categoryItem {
+  cursor: pointer;
+  padding: 8px 16px 8px 16px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+.categoryItem.active {
+  background: rgba(51, 160, 255, 0.15);
+  border-radius: 4px;
+}
+.categoryItem:hover {
+  background: rgba(51, 160, 255, 0.15);
+  border-radius: 4px;
 }
 </style>
