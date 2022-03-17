@@ -22,7 +22,7 @@ export default {
       items: [
         { message: 'По умолчанию' },
         { message: 'Сначала дешевые' },
-        {message: 'Сначала дорогие' }
+        { message: 'Сначала дорогие' }
       ]
     }
   },
