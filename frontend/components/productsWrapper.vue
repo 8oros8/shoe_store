@@ -1,33 +1,34 @@
 <template>
   <div class="productsWrapper">
-    <div class="optionsWrapper"></div>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
+    <Selector></Selector>
+    <div class="productsContainer">
+      <Card></Card>
+      <Card></Card>
+      <Card></Card>
+      <Card></Card>
+      <Card></Card>
+      <Card></Card>
+    </div>
   </div>
 </template>
 
 <script>
 import Card from '/components/productCard.vue'
+import Selector from '/components/optionsSelector.vue'
 export default {
   name: "products-wrapper",
-  components: {Card}
+  components: {Card, Selector}
 }
 </script>
 
 <style scoped>
 .productsWrapper {
+
+  margin-bottom: 5%;
+}
+.productsContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-bottom: 5%;
-}
-.optionsWrapper {
-  display: flex;
-  width: 100%;
-  border-bottom: 1px solid #DBDBDB;;
 }
 </style>
