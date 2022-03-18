@@ -21,6 +21,7 @@ export default {
   color: #FFFFFF;
   border-radius: 4px;
   border-width: 0;
+  font-family: Inter;
   font-style: normal;
   font-weight: 700;
   font-size: 16px;

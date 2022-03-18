@@ -32,19 +32,20 @@ export default {
 .categoriesSidebar {
   display: flex;
   flex-direction: column;
-  width: 19%;
-  margin-right: 194px;
+  width: 15%;
 }
 .currentCategory {
   display: flex;
   width: 120px;
   height: 40px;
+  font-family: Inter;
   font-weight: 600;
   font-size: 28px;
   line-height: 34px;
   color: #282A2C;
 }
 .categoriesHeader {
+  font-family: Inter;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -55,6 +56,7 @@ export default {
 .categoryItem {
   cursor: pointer;
   padding: 8px 16px 8px 16px;
+  font-family: Inter;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
