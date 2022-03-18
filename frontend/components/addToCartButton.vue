@@ -1,12 +1,15 @@
 <template>
   <button class="basicButton">
-    В корзину
+    {{ message }}
   </button>
 </template>
 
 <script>
 export default {
   name: "Button",
+  props: {
+    message: String,
+  }
 }
 </script>
 

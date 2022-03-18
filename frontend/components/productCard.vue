@@ -6,7 +6,7 @@
       <div class="productName">Louis Vuitton 270 </div>
       <div class="productPrice">2 990 ₽</div>
     </div>
-    <Button></Button>
+    <Button message="В корзину"></Button>
   </div>
 </template>
 
