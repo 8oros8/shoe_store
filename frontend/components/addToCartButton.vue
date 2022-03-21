@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "Button",
+  name: "cartButton",
   props: {
     message: String,
   }
@@ -15,6 +15,9 @@ export default {
 
 <style scoped>
 .basicButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 80%;
   height: 48px;
   background-color: #33A0FF;

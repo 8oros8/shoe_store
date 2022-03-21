@@ -6,12 +6,13 @@
       <div class="productName">Louis Vuitton 270 </div>
       <div class="productPrice">2 990 ₽</div>
     </div>
-    <Button message="В корзину"></Button>
+    <cart-button message="В корзину"></cart-button>
   </div>
 </template>
 
 <script>
 import Button from '/components/addToCartButton.vue'
+import CartButton from "./addToCartButton";
 
 export default {
   name: "Card",
@@ -20,7 +21,7 @@ export default {
       isFavorite: false
     }
   },
-  components: {Button}
+  components: {CartButton, Button}
 }
 </script>
 
@@ -46,6 +47,7 @@ export default {
   flex-direction: column;
   width: 80%;
   justify-content: space-around;
+  margin-bottom: 16px;
 }
 .productType {
   display: flex;
@@ -54,10 +56,11 @@ export default {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
-  line-height: 150%;
+  line-height: 21px;
   color: #223263;
 }
 .favoriteButton {
+  display: flex;
   width: 15px;
   height: 15px;
 }
@@ -65,16 +68,16 @@ export default {
   cursor: pointer;
 }
 .productName {
+  display: flex;
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 150%;
+  line-height: 27px;
   color: #223263;
 }
 .productPrice {
+  display: flex;
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.5px;
   color: #33A0FF;

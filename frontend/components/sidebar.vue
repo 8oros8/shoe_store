@@ -54,8 +54,11 @@ export default {
   margin-bottom: 24px;
 }
 .categoryItem {
+  display: flex;
+  align-items: center;
+  justify-content: left;
   cursor: pointer;
-  padding: 8px 16px 8px 16px;
+  padding: 7% 15% 7% 15%;
   font-family: Inter;
   font-style: normal;
   font-weight: 400;

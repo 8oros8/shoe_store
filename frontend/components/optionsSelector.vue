@@ -32,6 +32,7 @@ export default {
 <style scoped>
 .optionsWrapper {
   display: block;
+  width: 100%;
   border-bottom: 1px solid #DBDBDB;
   padding-bottom: 24px;
   font-weight: 400;

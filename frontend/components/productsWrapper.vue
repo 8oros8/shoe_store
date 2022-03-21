@@ -23,7 +23,7 @@ export default {
 
 <style scoped>
 .productsWrapper {
-
+  width: 75%;
   margin-bottom: 5%;
 }
 .productsContainer {

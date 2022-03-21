@@ -7,14 +7,14 @@
       </div>
       <div class="rightLogos">
         <div>₽ 2 990.00</div>
-        <img src="../assets/logos/cart_logo.png" class="cartImg">
+        <NuxtLink to="/cart" class="cartImg"><img src="../assets/logos/cart_logo.png" class="cartImg"></NuxtLink>
       </div>
     </div>
     <div class="menuWrapper">
       <div class="menu">
         <div class="menuItem">ГЛАВНАЯ</div>
-        <div class="menuItem">КАТАЛОГ</div>
-        <div class="menuItem">ДОСТАВКА И ОПЛАТА</div>
+        <NuxtLink to="/" class="menuItem">КАТАЛОГ</NuxtLink>
+        <NuxtLink to="/cart" class="menuItem">ДОСТАВКА И ОПЛАТА</NuxtLink>
         <div class="menuItem">О НАС</div>
         <div class="menuItem">КОНТАКТЫ</div>
       </div>
@@ -28,7 +28,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .header {
   display: flex;
@@ -93,6 +93,8 @@ export default {
   line-height: 36px;
   letter-spacing: 0.03em;
   font-style: normal;
+  color: #282A2C;
+  text-decoration: none;
 }
 .menuItem:hover {
   cursor: pointer;

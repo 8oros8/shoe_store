@@ -1,15 +1,15 @@
 <template>
   <div class="promocodeWrapper">
     <input class="promocodeInput" type="text" v-model="promocode" @focus="promocode=''">
-    <Button message="Применить" class="applyButton"></Button>
+    <cart-button message="Применить" class="applyButton"></cart-button>
   </div>
 </template>
 
 <script>
-import Button from '/components/addToCartButton.vue'
+import CartButton from "./addToCartButton";
 export default {
   name: "Promocode",
-  components: { Button },
+  components: { CartButton },
   data() {
     return {
       promocode: 'Ваш промокод'
