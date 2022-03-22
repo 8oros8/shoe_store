@@ -23,11 +23,11 @@ export default {
   components: {Header, Footer, productsWrapper, Sidebar},
   computed: {
     items () {
-      return this.$store.state.todos.list
+      return this.$store.state.shoppingCart.list
     },
     subtotal () {
       let subtotal = 0
-      for (let item of this.$store.state.todos.list) {
+      for (let item of this.$store.state.shoppingCart.list) {
         let price = item.productPrice.split(' ').filter(element => !isNaN(element)).join('')
         price = +price
         subtotal += price
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     addItem (itemInfo) {
-      this.$store.commit('todos/add', itemInfo)
+      this.$store.commit('shoppingCart/add', itemInfo)
     },
   }
 }
