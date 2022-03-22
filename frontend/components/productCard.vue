@@ -1,27 +1,32 @@
 <template>
   <div class="cardWrapper">
-    <img src="../assets/product_images/product1.png">
+    <img :src="productInfo.productImage">
     <div class="productInfo">
-      <div class="productType">Ботинки<img class="favoriteButton" @click="isFavorite = !isFavorite" v-if="isFavorite" src="../assets/logos/favoriteStar.png"><img class="favoriteButton" @click="isFavorite = !isFavorite" v-else src="../assets/logos/notFavoriteStar.png"></div>
-      <div class="productName">Louis Vuitton 270 </div>
-      <div class="productPrice">2 990 ₽</div>
+      <div class="productType">{{ productInfo.productType }}<img class="favoriteButton" @click="isFavorite = !isFavorite" v-if="isFavorite" src="../static/logos/favoriteStar.png"><img class="favoriteButton" @click="isFavorite = !isFavorite" v-else src="../static/logos/notFavoriteStar.png"></div>
+      <div class="productName">{{ productInfo.productName }}</div>
+      <div class="productPrice">{{ productInfo.productPrice }}</div>
     </div>
-    <cart-button message="В корзину"></cart-button>
+    <cart-button message="В корзину" @button-pressed="$emit('add-to-cart', productInfo)"></cart-button>
   </div>
 </template>
 
 <script>
-import Button from '/components/addToCartButton.vue'
 import CartButton from "./addToCartButton";
 
 export default {
-  name: "Card",
+  name: "productCard",
   data() {
     return {
-      isFavorite: false
+      isFavorite: false,
+      productInfo: {
+        productImage: "/product_images/product1.png",
+        productType: "Ботинки",
+        productName: "Louis Vuitton 270",
+        productPrice: "2 990 ₽",
+      },
     }
   },
-  components: {CartButton, Button}
+  components: {CartButton}
 }
 </script>
 

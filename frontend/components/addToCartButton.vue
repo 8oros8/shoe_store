@@ -1,5 +1,5 @@
 <template>
-  <button class="basicButton">
+  <button class="basicButton" @click="$emit('button-pressed')">
     {{ message }}
   </button>
 </template>
@@ -9,7 +9,7 @@ export default {
   name: "cartButton",
   props: {
     message: String,
-  }
+  },
 }
 </script>
 

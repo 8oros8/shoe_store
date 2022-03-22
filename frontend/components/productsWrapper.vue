@@ -2,22 +2,26 @@
   <div class="productsWrapper">
     <Selector></Selector>
     <div class="productsContainer">
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
+      <product-card @add-to-cart="addItem"></product-card>
+      <product-card @add-to-cart="addItem"></product-card>
+      <product-card @add-to-cart="addItem"></product-card>
+      <product-card @add-to-cart="addItem"></product-card>
+      <product-card @add-to-cart="addItem"></product-card>
+      <product-card @add-to-cart="addItem"></product-card>
     </div>
   </div>
 </template>
 
 <script>
-import Card from '/components/productCard.vue'
 import Selector from '/components/optionsSelector.vue'
+import productCard from "./productCard";
 export default {
   name: "products-wrapper",
-  components: {Card, Selector}
+  components: {productCard, Selector},
+  props: {
+    items: [],
+    addItem: Function,
+  },
 }
 </script>
 

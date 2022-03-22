@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <Header></Header>
+    <Header :subtotal="subtotal.toLocaleString()"></Header>
     <div class="bodyWrapper">
       <back-button></back-button>
       <div class="cartHeader">
@@ -10,7 +10,7 @@
           <div>ЦЕНА</div>
         </div>
       </div>
-      <CartWrapper></CartWrapper>
+      <CartWrapper :items="items" :removeItem="removeItem"></CartWrapper>
       <div class="bottomCart">
         <Promocode></Promocode>
         <div class="paymentInfo">
@@ -18,25 +18,26 @@
             <div>
               Промежуточный итог
             </div>
-            <div class="subtotalCount">5 980 ₽</div>
+            <div class="subtotalCount">{{ subtotal.toLocaleString() + ' ₽'}}</div>
           </div>
           <div class="delivery">
             <div>
               Доставка
             </div>
-            <div class="deliveryCount">500 ₽</div>
+            <div class="deliveryCount">{{ deliveryCount.toLocaleString() + ' ₽' }}</div>
           </div>
           <div class="coupon">
             <div>
               Купон
             </div>
-            <div class="couponCount">Нет</div>
+            <div v-if="promocode === 0" class="couponCount">Нет</div>
+            <div v-else class="couponCount">{{ promocode.toLocaleString() + ' ₽' }}</div>
           </div>
           <div class="total">
             <div>
               Общая сумма
             </div>
-            <div class="totalCount">6 480 ₽</div>
+            <div class="totalCount">{{ total.toLocaleString() + ' ₽'}}</div>
             <cart-button message="Оформить заказ" class="checkout"></cart-button>
           </div>
         </div>
@@ -53,9 +54,38 @@ import BackButton from "../components/backButton";
 import CartWrapper from "../components/cartWrapper";
 import Promocode from "../components/promocode";
 import CartButton from "../components/addToCartButton";
+
 export default {
   name: "CartPage",
-  components: {CartButton, Promocode, CartWrapper, BackButton, Header, Footer}
+  components: {CartButton, Promocode, CartWrapper, BackButton, Header, Footer},
+  computed: {
+    items () {
+      return this.$store.state.todos.list
+    },
+    subtotal () {
+      let subtotal = 0
+      for (let item of this.$store.state.todos.list) {
+        let price = item.productPrice.split(' ').filter(element => !isNaN(element)).join('')
+        price = +price
+        subtotal += price
+      }
+      return subtotal
+    },
+    deliveryCount () {
+      return 500
+    },
+    promocode () {
+      return 0
+    },
+    total () {
+      return +this.subtotal + this.deliveryCount - this.promocode
+    }
+  },
+  methods: {
+    removeItem(itemInfo) {
+      this.$store.commit('todos/remove', itemInfo)
+    },
+  }
 }
 </script>
 
@@ -78,7 +108,7 @@ export default {
 }
 .mainCartHeader {
   margin-bottom: 88px;
-  font-family: 'OpenSans';
+  font-family: 'OpenSans', sans-serif;
   font-weight: 600;
   font-size: 28px;
   line-height: 42px;
@@ -92,7 +122,7 @@ export default {
   border-bottom: 2px solid #E8E8E9;
 }
 .headingsWrapper > div {
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
   font-weight: 500;
   line-height: 24px;
   color: #444749;
@@ -117,28 +147,28 @@ export default {
   margin-bottom: 28px;
 }
 .delivery > div {
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 21px;
   color: #262626;
 }
 .coupon > div {
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 21px;
   color: #262626;
 }
 .subtotal > div {
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 21px;
   color: #262626;
 }
 .total > div {
-  font-family: 'Poppins', 'OpenSans';
+  font-family: 'Poppins', 'OpenSans', sans-serif;
   font-weight: 500;
   font-size: 30px;
   line-height: 45px;

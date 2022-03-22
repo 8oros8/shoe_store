@@ -1,23 +1,20 @@
 <template>
   <div class="itemWrapper">
     <div class="leftItemInfo">
-      <img src="../assets/logos/crossClose.png" class="crossClose">
-      <img class="itemPicture" :src="itemPicture">
-      <div class="itemName"> {{ itemName }}</div>
+      <img src="../static/logos/crossClose.png" class="crossClose" @click="$emit('remove-item')">
+      <img class="itemPicture" :src="productInfo.productImage">
+      <div class="itemName"> {{ productInfo.productName }}</div>
     </div>
-    <div class="itemPrice">{{ itemPrice }}</div>
+    <div class="itemPrice">{{ productInfo.productPrice }}</div>
   </div>
 </template>
 
 <script>
 export default {
   name: "cartItem",
-  data() {
-    return{
-      itemName: 'Louis Vuitton 270 ',
-      itemPicture: "_nuxt/assets/product_images/product1.png",
-      itemPrice: '2 990 ₽'
-    }
+  props: {
+    productInfo: {},
+    removeItem: Function,
   }
 }
 </script>

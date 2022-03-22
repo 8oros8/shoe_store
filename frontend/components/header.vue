@@ -2,12 +2,15 @@
   <div class="header">
     <div class="logosWrapper">
       <div class="leftLogos">
-        <img src="../assets/logos/black_logo.png" class="logoImg">
+        <img src="../static/logos/black_logo.png" class="logoImg">
         <div>BlackWall Store</div>
       </div>
       <div class="rightLogos">
-        <div>₽ 2 990.00</div>
-        <NuxtLink to="/cart" class="cartImg"><img src="../assets/logos/cart_logo.png" class="cartImg"></NuxtLink>
+        <div>{{ "₽ " + subtotal }}</div>
+        <NuxtLink to="/cart" class="cartImg">
+          <img v-if="subtotal != 0" src="../static/logos/cart_logo.png" class="cartImg">
+          <img v-else src="../static/logos/emptyCart.png" class="emptyCart">
+        </NuxtLink>
       </div>
     </div>
     <div class="menuWrapper">
@@ -24,7 +27,10 @@
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  props: {
+    subtotal: String,
+  }
 }
 </script>
 
@@ -75,7 +81,14 @@ export default {
   height: 100%;
 }
 .cartImg {
+  display: flex;
   height: 100%;
+}
+.emptyCart {
+  height: 24px;
+  width: 24px;
+  margin-right: 25px;
+  margin-top: 15px;
 }
 .menuWrapper {
   width: 100%;

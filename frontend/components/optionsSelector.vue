@@ -2,7 +2,7 @@
   <div class="optionsWrapper">
     <div class="styledSelect" @click="selectionStart = !selectionStart">
       <div class="selected">{{ selected }}</div>
-      <img src="../assets/logos/selectArrow.png">
+      <img src="../static/logos/selectArrow.png">
     </div>
     <ul class="selectOptions" v-model="items" v-if="selectionStart">
       <li v-for="item in items" @click="selected = item.message; selectionStart = !selectionStart">

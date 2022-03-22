@@ -1,7 +1,7 @@
 <template>
   <NuxtLink to="/" class="backButtonWrapper">
     <button class="backButton">
-      <img src="../assets/logos/leftArrow.png" class="leftArrow">
+      <img src="../static/logos/leftArrow.png" class="leftArrow">
       {{ message }}
     </button>
   </NuxtLink>

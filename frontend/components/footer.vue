@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="footerContentWrapper">
       <div class="leftFooter">
-        <div><img src="../assets/logos/blue_logo.png" class="leftFooterLogo"><div>BlackWall store</div></div>
+        <div><img src="../static/logos/blue_logo.png" class="leftFooterLogo"><div>BlackWall store</div></div>
         <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.Since the 1500s, when an unknown printer.</div>
       </div>
       <div class="rightFooter">
