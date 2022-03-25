@@ -1,11 +1,14 @@
 <template>
   <div class="categoriesSidebar">
-    <div class="currentCategory"> {{ currentCategory }}</div>
+    <div v-if="currentCategory !== null" class="currentCategory"> {{ currentCategory.name }}</div>
     <div class="categoriesHeader">Категории</div>
     <div class="categoryItem"
+         :class="{active: currentCategory === null}"
+         @click="$emit('chooseCategory', null)">Все</div>
+    <div class="categoryItem"
          v-for="category in categories"
-         @click="$emit('chooseCategory', category.name)"
-         :class="{active: category.name === currentCategory}"
+         @click="$emit('chooseCategory', category)"
+         :class="{active: category === currentCategory}"
     >
       {{ category.name }}
     </div>
@@ -32,7 +35,7 @@ export default {
     this.fetchCategories()
   },
   props: {
-    currentCategory: String,
+    currentCategory: Object,
   },
 }
 </script>

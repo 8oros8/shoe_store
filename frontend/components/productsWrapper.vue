@@ -5,6 +5,7 @@
       <product-card v-for="item of allItemsList"
                     @add-to-cart="addItem"
                     :product-info="item"
+                    :key="allItemsList.indexOf(item)"
       ></product-card>
     </div>
   </div>

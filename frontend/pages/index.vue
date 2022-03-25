@@ -2,7 +2,8 @@
     <div class="bodyWrapper">
       <Sidebar
           :currentCategory="currentCategory"
-          @chooseCategory="currentCategory=$event"></Sidebar>
+          @chooseCategory="changeCategory"
+      ></Sidebar>
       <products-wrapper
           :allItemsList="allItemsList"
           :addItem="addItem"
@@ -28,17 +29,31 @@ export default {
       this.$store.commit('shoppingCart/add', itemInfo)
     },
     changeCategory (chosenCategory) {
-      // fetch data by chose ID
+      if (this.currentCategory !== chosenCategory) {
+        this.currentCategory = chosenCategory
+        this.fetchItems(chosenCategory)
+      }
     },
-    async fetchItems() {
-      const allItems = await this.$axios.$get('/products')
-      for (let item of allItems) {
-        this.allItemsList.push(item)
+    async fetchItems(chosen) {
+      if (chosen === null) {
+        this.allItemsList = []
+        const allItems = await this.$axios.$get('/products')
+        for (let item of allItems) {
+          this.allItemsList.push(item)
+        }
+      }
+      else {
+        this.allItemsList = []
+        let fetchRoute = '/products/category/' + chosen.id
+        const selectedCategoryItems = await this.$axios.get(fetchRoute)
+        for (let item of selectedCategoryItems.data) {
+          this.allItemsList.push(item)
+        }
       }
     },
   },
   mounted() {
-    this.fetchItems()
+    this.fetchItems(null)
   }
 }
 </script>
