@@ -9,7 +9,14 @@ export const mutations = {
     remove(state, item) {
         state.list.splice(state.list.indexOf(item), 1)
     },
-    toggle(state, item) {
-        item.done = !item.done
-    }
+}
+export const getters = {
+    subtotal (state) {
+        let subtotal = 0
+        for (let item of state.list) {
+            subtotal += item.price
+        }
+        return subtotal
+    },
+
 }

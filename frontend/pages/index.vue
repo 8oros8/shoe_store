@@ -1,44 +1,44 @@
 <template>
   <div class="wrapper">
-    <Header :subtotal="subtotal.toLocaleString()"></Header>
     <div class="bodyWrapper">
-      <Sidebar></Sidebar>
+      <Sidebar :currentCategory="currentCategory" @chooseCategory="currentCategory=$event"></Sidebar>
       <products-wrapper
-          :items="items"
+          :allItemsList="allItemsList"
           :addItem="addItem"
           v-on:add-to-cart="addItem"
       ></products-wrapper>
     </div>
-    <Footer></Footer>
   </div>
 </template>
 
 <script>
-import Header from '/components/header.vue'
-import Footer from '/components/footer.vue'
 import Sidebar from '/components/sidebar.vue'
 import productsWrapper from '/components/productsWrapper.vue'
 export default {
   name: 'IndexPage',
-  components: {Header, Footer, productsWrapper, Sidebar},
-  computed: {
-    items () {
-      return this.$store.state.shoppingCart.list
-    },
-    subtotal () {
-      let subtotal = 0
-      for (let item of this.$store.state.shoppingCart.list) {
-        let price = item.productPrice.split(' ').filter(element => !isNaN(element)).join('')
-        price = +price
-        subtotal += price
-      }
-      return subtotal
-    },
+  components: {productsWrapper, Sidebar},
+  data () {
+    return {
+      currentCategory: null,
+      allItemsList: [],
+    }
   },
   methods: {
     addItem (itemInfo) {
       this.$store.commit('shoppingCart/add', itemInfo)
     },
+    changeCategory (chosenCategory) {
+      // fetch data by chose ID
+    },
+    async fetchItems() {
+      const allItems = await this.$axios.$get('/products')
+      for (let item of allItems) {
+        this.allItemsList.push(item)
+      }
+    },
+  },
+  mounted() {
+    this.fetchItems()
   }
 }
 </script>

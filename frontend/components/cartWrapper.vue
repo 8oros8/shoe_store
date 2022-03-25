@@ -1,6 +1,7 @@
 <template>
   <div class="cartWrapper">
     <cart-item v-for="item in items"
+               :key="items.indexOf(item)"
                :removeItem="removeItem"
                :product-info="item"
                @remove-item="removeItem(item)"

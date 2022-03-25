@@ -2,18 +2,24 @@
   <div class="itemWrapper">
     <div class="leftItemInfo">
       <img src="../static/logos/crossClose.png" class="crossClose" @click="$emit('remove-item')">
-      <img class="itemPicture" :src="productInfo.productImage">
-      <div class="itemName"> {{ productInfo.productName }}</div>
+      <img class="itemPicture" src="https://picsum.photos/270/260">
+      <div class="itemName"> {{ productInfo.producer.name }}</div>
     </div>
-    <div class="itemPrice">{{ productInfo.productPrice }}</div>
+    <div class="itemPrice">{{ productInfo.price + ' ₽' }}</div>
   </div>
 </template>
 
 <script>
 export default {
   name: "cartItem",
+  data() {
+    return {
+      imgURL: 'http://localhost:1337' + this.productInfo.main_image.url
+    }
+  },
   props: {
     productInfo: {},
+    key: {},
     removeItem: Function,
   }
 }

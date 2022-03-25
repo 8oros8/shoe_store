@@ -1,10 +1,10 @@
 <template>
   <div class="cardWrapper">
-    <img :src="productInfo.productImage">
+    <img src="https://picsum.photos/270/260">
     <div class="productInfo">
-      <div class="productType">{{ productInfo.productType }}<img class="favoriteButton" @click="isFavorite = !isFavorite" v-if="isFavorite" src="../static/logos/favoriteStar.png"><img class="favoriteButton" @click="isFavorite = !isFavorite" v-else src="../static/logos/notFavoriteStar.png"></div>
-      <div class="productName">{{ productInfo.productName }}</div>
-      <div class="productPrice">{{ productInfo.productPrice }}</div>
+      <div class="productType">{{ productInfo.category.name }}<img class="favoriteButton" @click="isFavorite = !isFavorite" v-if="isFavorite" src="../static/logos/favoriteStar.png"><img class="favoriteButton" @click="isFavorite = !isFavorite" v-else src="../static/logos/notFavoriteStar.png"></div>
+      <div class="productName">{{ productInfo.producer.name }}</div>
+      <div class="productPrice">{{ productInfo.price + ' ₽'}}</div>
     </div>
     <cart-button message="В корзину" @button-pressed="$emit('add-to-cart', productInfo)"></cart-button>
   </div>
@@ -18,13 +18,11 @@ export default {
   data() {
     return {
       isFavorite: false,
-      productInfo: {
-        productImage: "/product_images/product1.png",
-        productType: "Ботинки",
-        productName: "Louis Vuitton 270",
-        productPrice: "2 990 ₽",
-      },
+      imgURL: 'http://localhost:1337' + this.productInfo.main_image.url
     }
+  },
+  props: {
+    productInfo: Object,
   },
   components: {CartButton}
 }
@@ -44,6 +42,7 @@ export default {
   border-radius: 7px;
 }
 .cardWrapper > img {
+  display: flex;
   width: 100%;
   height: 55%;
 }
@@ -53,6 +52,7 @@ export default {
   width: 80%;
   justify-content: space-around;
   margin-bottom: 16px;
+  margin-top: 24px;
 }
 .productType {
   display: flex;
@@ -75,6 +75,7 @@ export default {
 .productName {
   display: flex;
   font-style: normal;
+  font-family: Poppins, OpenSans, sans-serif;
   font-weight: 700;
   line-height: 27px;
   color: #223263;

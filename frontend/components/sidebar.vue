@@ -2,7 +2,13 @@
   <div class="categoriesSidebar">
     <div class="currentCategory"> {{ currentCategory }}</div>
     <div class="categoriesHeader">Категории</div>
-    <div class="categoryItem" v-for="category in categories" v-bind:class="{active: category.message === currentCategory}" @click="currentCategory = category.message; category.isActive = !category.isActive;"> {{ category.message }}</div>
+    <div class="categoryItem"
+         v-for="category in categories"
+         @click="$emit('chooseCategory', category.message)"
+         :class="{active: category.message === currentCategory}"
+    >
+      {{ category.message }}
+    </div>
   </div>
 </template>
 
@@ -11,7 +17,6 @@ export default {
   name: "Sidebar",
   data() {
     return {
-      currentCategory: 'Ботинки',
       categories: [
         { message: 'Сапоги'  },
         { message: 'Кроссовки'  },
@@ -21,6 +26,9 @@ export default {
         { message: 'Сапоги'  }
       ]
     }
+  },
+  props: {
+    currentCategory: String,
   },
   methods: {
 

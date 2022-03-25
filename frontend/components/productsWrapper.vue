@@ -2,12 +2,10 @@
   <div class="productsWrapper">
     <Selector></Selector>
     <div class="productsContainer">
-      <product-card @add-to-cart="addItem"></product-card>
-      <product-card @add-to-cart="addItem"></product-card>
-      <product-card @add-to-cart="addItem"></product-card>
-      <product-card @add-to-cart="addItem"></product-card>
-      <product-card @add-to-cart="addItem"></product-card>
-      <product-card @add-to-cart="addItem"></product-card>
+      <product-card v-for="item of allItemsList"
+                    @add-to-cart="addItem"
+                    :product-info="item"
+      ></product-card>
     </div>
   </div>
 </template>
@@ -19,8 +17,8 @@ export default {
   name: "products-wrapper",
   components: {productCard, Selector},
   props: {
-    items: [],
     addItem: Function,
+    allItemsList: [],
   },
 }
 </script>

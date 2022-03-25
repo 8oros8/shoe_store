@@ -1,6 +1,5 @@
 <template>
   <div class="wrapper">
-    <Header :subtotal="subtotal.toLocaleString()"></Header>
     <div class="bodyWrapper">
       <back-button></back-button>
       <div class="cartHeader">
@@ -43,13 +42,10 @@
         </div>
       </div>
     </div>
-    <Footer></Footer>
   </div>
 </template>
 
 <script>
-import Header from '/components/header.vue'
-import Footer from '/components/footer.vue'
 import BackButton from "../components/backButton";
 import CartWrapper from "../components/cartWrapper";
 import Promocode from "../components/promocode";
@@ -57,19 +53,13 @@ import CartButton from "../components/addToCartButton";
 
 export default {
   name: "CartPage",
-  components: {CartButton, Promocode, CartWrapper, BackButton, Header, Footer},
+  components: {CartButton, Promocode, CartWrapper, BackButton},
   computed: {
     items () {
       return this.$store.state.shoppingCart.list
     },
     subtotal () {
-      let subtotal = 0
-      for (let item of this.$store.state.shoppingCart.list) {
-        let price = item.productPrice.split(' ').filter(element => !isNaN(element)).join('')
-        price = +price
-        subtotal += price
-      }
-      return subtotal
+      return this.$store.getters["shoppingCart/subtotal"]
     },
     deliveryCount () {
       return 500
