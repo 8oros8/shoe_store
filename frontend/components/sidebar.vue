@@ -4,10 +4,10 @@
     <div class="categoriesHeader">Категории</div>
     <div class="categoryItem"
          v-for="category in categories"
-         @click="$emit('chooseCategory', category.message)"
-         :class="{active: category.message === currentCategory}"
+         @click="$emit('chooseCategory', category.name)"
+         :class="{active: category.name === currentCategory}"
     >
-      {{ category.message }}
+      {{ category.name }}
     </div>
   </div>
 </template>
@@ -17,22 +17,23 @@ export default {
   name: "Sidebar",
   data() {
     return {
-      categories: [
-        { message: 'Сапоги'  },
-        { message: 'Кроссовки'  },
-        { message: 'Сапоги'  },
-        { message: 'Ботинки'  },
-        { message: 'Сапоги'  },
-        { message: 'Сапоги'  }
-      ]
+      categories: [],
     }
+  },
+  methods: {
+    async fetchCategories() {
+      const allCategories = await this.$axios.$get('/categories')
+      for (let category of allCategories) {
+        this.categories.push(category)
+      }
+    },
+  },
+  mounted() {
+    this.fetchCategories()
   },
   props: {
     currentCategory: String,
   },
-  methods: {
-
-  }
 }
 </script>
 
