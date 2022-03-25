@@ -8,8 +8,8 @@
       <div class="rightFooter">
         <div>Contact Us</div>
         <div class="contactInfo">
-          <div>+4 161 64  1729 55</div>
-          <div>info@wall.black</div>
+          <div>{{ contacts.phone }}</div>
+          <div>{{ contacts.email }}</div>
         </div>
       </div>
     </div>
@@ -18,7 +18,20 @@
 
 <script>
 export default {
-  name: "Footer"
+  name: "Footer",
+  data() {
+    return {
+      contacts: [],
+    }
+  },
+  methods: {
+    async fetchContacts() {
+      this.contacts = await this.$axios.$get('/contacts')
+    },
+  },
+  mounted() {
+    this.fetchContacts()
+  }
 }
 </script>
 
@@ -83,7 +96,6 @@ export default {
   margin: 0;
 }
 .contactInfo > div {
-  margin-bottom: 10px;
   margin-bottom: 10px;
 }
 
