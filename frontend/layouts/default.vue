@@ -1,6 +1,6 @@
 <template>
   <div class="defaultLayout">
-    <Header :subtotal="subtotal.toLocaleString()"></Header>
+    <Header :subtotal="subtotal.toLocaleString()" :itemCount="itemCount"></Header>
     <Nuxt />
     <Footer></Footer>
   </div>
@@ -17,6 +17,9 @@ export default {
     subtotal () {
       return this.$store.getters["shoppingCart/subtotal"]
     },
+    itemCount () {
+      return this.$store.getters["shoppingCart/itemCount"]
+    }
   },
 }
 </script>

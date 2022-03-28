@@ -18,5 +18,7 @@ export const getters = {
         }
         return subtotal
     },
-
+    itemCount (state) {
+        return state.list.length
+    }
 }

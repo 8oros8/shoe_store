@@ -8,8 +8,14 @@
       <div class="rightLogos">
         <div>{{ "₽ " + subtotal }}</div>
         <NuxtLink to="/cart" class="cartImg">
-          <img v-if="subtotal != 0" src="../static/logos/cart_logo.png" class="cartImg">
-          <img v-else src="../static/logos/emptyCart.png" class="emptyCart">
+          <img v-if="subtotal == 0" src="../static/logos/emptyCart.png" class="emptyCart">
+          <div v-else class="filledCartWrapper">
+            <img src="../static/logos/emptyCart.png" class="filledCart">
+            <div class="redCircle">
+              <img src="../static/logos/redCartCircle.png">
+              <div class="itemCount">{{itemCount}}</div>
+            </div>
+          </div>
         </NuxtLink>
       </div>
     </div>
@@ -30,6 +36,7 @@ export default {
   name: "Header",
   props: {
     subtotal: String,
+    itemCount: Number,
   }
 }
 </script>
@@ -82,13 +89,48 @@ export default {
 }
 .cartImg {
   display: flex;
+  justify-content: center;
   height: 100%;
+  text-decoration: none;
 }
 .emptyCart {
   height: 24px;
   width: 24px;
   margin-right: 25px;
   margin-top: 15px;
+}
+.filledCartWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24px;
+  margin-top: 5px;
+}
+.filledCart {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+}
+.redCircle {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  left: 10px;
+  bottom: 10px;
+}
+.redCircle > img {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+.itemCount {
+  position: absolute;
+  color: #FFFFFF;
+  font-family: Poppins, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
 }
 .menuWrapper {
   width: 100%;
