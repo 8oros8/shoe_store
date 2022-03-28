@@ -1,6 +1,7 @@
 <template>
   <div class="productsWrapper">
-    <Selector></Selector>
+    <Selector @select="sortItems"
+              :selected="selected"></Selector>
     <div class="productsContainer">
       <product-card v-for="item of allItemsList"
                     @add-to-cart="addItem"
@@ -19,7 +20,9 @@ export default {
   components: {productCard, Selector},
   props: {
     addItem: Function,
-    allItemsList: [],
+    sortItems: Function,
+    allItemsList: Array,
+    selected: String,
   },
 }
 </script>

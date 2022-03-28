@@ -4,9 +4,11 @@
       <div class="selected">{{ selected }}</div>
       <img src="../static/logos/selectArrow.png">
     </div>
-    <ul class="selectOptions" v-model="items" v-if="selectionStart">
-      <li v-for="item in items" @click="selected = item.message; selectionStart = !selectionStart">
-        {{ item.message }}
+    <ul class="selectOptions" v-model="options" v-if="selectionStart">
+      <li v-for="option in options"
+          @click="selectOption(option);
+          $emit('select', option)">
+        {{ option.message }}
       </li>
     </ul>
   </div>
@@ -18,12 +20,20 @@ export default {
   data() {
     return {
       selectionStart: false,
-      selected: 'По умолчанию',
-      items: [
+      options: [
         { message: 'По умолчанию' },
         { message: 'Сначала дешевые' },
         { message: 'Сначала дорогие' }
       ]
+    }
+  },
+  props: {
+    selected: String,
+  },
+  methods: {
+    selectOption(option) {
+      this.selected = option.message
+      this.selectionStart = !this.selectionStart
     }
   },
 }
