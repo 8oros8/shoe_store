@@ -1,9 +1,9 @@
 <template>
-  <div class="defaultLayout">
-    <Header :subtotal="subtotal.toLocaleString()" :itemCount="itemCount"></Header>
-    <Nuxt />
-    <Footer></Footer>
-  </div>
+    <div class="defaultLayout">
+      <Header :subtotal="subtotal.toLocaleString()" :itemCount="itemCount"></Header>
+      <Nuxt />
+      <Footer></Footer>
+    </div>
 </template>
 
 <script>
@@ -26,9 +26,8 @@ export default {
 
 <style>
 @import "../assets/fonts.css";
-
 * {
-  font-family: 'Poppins', 'OpenSans';
+  font-family: 'Poppins', 'OpenSans', sans-serif;
 }
 body {
   margin: 0;

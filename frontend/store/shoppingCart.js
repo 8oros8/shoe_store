@@ -9,6 +9,9 @@ export const mutations = {
     remove(state, item) {
         state.list.splice(state.list.indexOf(item), 1)
     },
+    clearCart(state) {
+        state.list = []
+    }
 }
 export const getters = {
     subtotal (state) {
