@@ -43,12 +43,18 @@ export default {
   },
   methods: {
     checkPhone(phone) {
+      const firstPlus = /^\+/gm;
+      if (!firstPlus.test(phone)) {
+        this.inputMemory = '+' + phone
+        phone=this.inputMemory
+      }
       const phoneFormat = /^\+\d+$/gm;
       this.wrongPhone = !phoneFormat.test(phone);
       if (!this.wrongPhone) {
         this.$emit('correct')
       }
       else this.$emit('incorrect')
+      return phone
     },
     checkEmail(email) {
       const emailFormat = /\w+@\w+.\w+/gm;
