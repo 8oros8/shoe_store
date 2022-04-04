@@ -1,17 +1,14 @@
 <template>
   <div class="categoriesSidebar">
-    <div v-if="currentCategory !== null" class="currentCategory"> {{ currentCategory.name }}</div>
-    <div class="categoriesHeader">Категории</div>
-    <div class="categoryItem"
-         :class="{active: currentCategory === null}"
+    <div v-if="currentCategory !== null" class="categoriesSidebar__currentCategory"> {{ currentCategory.name }}</div>
+    <div class="categoriesSidebar__header">Категории</div>
+    <div class="categoriesSidebar__categoryItem"
+         :class="{categoriesSidebar__categoryItem_active: currentCategory === null}"
          @click="$emit('chooseCategory', null)">Все</div>
-    <div class="categoryItem"
+    <div class="categoriesSidebar__categoryItem"
          v-for="category in categories"
-         @click="$emit('chooseCategory', category)"
-         :class="{active: category === currentCategory}"
-    >
-      {{ category.name }}
-    </div>
+         :class="{categoriesSidebar__categoryItem_active: category === currentCategory}"
+         @click="$emit('chooseCategory', category)">{{ category.name }}</div>
   </div>
 </template>
 
@@ -40,13 +37,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/main";
+
 .categoriesSidebar {
   display: flex;
   flex-direction: column;
   width: 15%;
-}
-.currentCategory {
+  &__currentCategory {
   display: flex;
   width: 120px;
   height: 40px;
@@ -54,35 +52,65 @@ export default {
   font-weight: 600;
   font-size: 28px;
   line-height: 34px;
-  color: #282A2C;
+  color: $default-black;
+    @include _967 {
+      font-size: 24px;
+    }
+    @include _600 {
+      font-size: 20px;
+    }
+    @include _300 {
+      font-size: 16px;
+    }
+  }
+  &__header {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    margin-top: 37px;
+    margin-bottom: 24px;
+    @include _967 {
+      font-size: 16px;
+    }
+    @include _600 {
+      font-size: 12px;
+    }
+    @include _300 {
+      font-size: 10px;
+    }
+  }
+  &__categoryItem {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    cursor: pointer;
+    padding: 7% 15% 7% 15%;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    @include _967 {
+      font-size: 14px;
+    }
+    @include _600 {
+      font-size: 12px;
+    }
+    @include _300 {
+      font-size: 10px;
+    }
+    &:hover {
+      background: rgba(51, 160, 255, 0.15);
+      border-radius: 4px;
+    }
+    &_active {
+       background: rgba(51, 160, 255, 0.15);
+       border-radius: 4px;
+     }
+  }
+
 }
-.categoriesHeader {
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  margin-top: 37px;
-  margin-bottom: 24px;
-}
-.categoryItem {
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  cursor: pointer;
-  padding: 7% 15% 7% 15%;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-}
-.categoryItem.active {
-  background: rgba(51, 160, 255, 0.15);
-  border-radius: 4px;
-}
-.categoryItem:hover {
-  background: rgba(51, 160, 255, 0.15);
-  border-radius: 4px;
-}
+
 </style>

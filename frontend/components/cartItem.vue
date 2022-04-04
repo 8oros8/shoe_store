@@ -1,11 +1,11 @@
 <template>
-  <div class="itemWrapper">
-    <div class="leftItemInfo">
-      <img src="../static/logos/crossClose.png" class="crossClose" @click="$emit('remove-item')">
-      <img class="itemPicture" src="https://picsum.photos/270/260">
-      <div class="itemName"> {{ productInfo.producer.name }}</div>
+  <div class="cartItem">
+    <div class="cartItem__left">
+      <img src="../static/logos/crossClose.png" class="cartItem__crossClose" @click="$emit('remove-item')">
+      <img class="cartItem__itemPicture" src="https://picsum.photos/270/260">
+      <div class="cartItem__itemName"> {{ productInfo.producer.name }}</div>
     </div>
-    <div class="itemPrice">{{ productInfo.price + ' ₽' }}</div>
+    <div class="cartItem__itemPrice">{{ productInfo.price + ' ₽' }}</div>
   </div>
 </template>
 
@@ -19,14 +19,15 @@ export default {
   },
   props: {
     productInfo: {},
-    key: {},
     removeItem: Function,
   }
 }
 </script>
 
-<style scoped>
-.itemWrapper {
+<style lang="scss" scoped>
+@import "../assets/main";
+
+.cartItem {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -34,22 +35,25 @@ export default {
   padding-left: 8px;
   padding-right: 8px;
   border-bottom: 2px solid #E8E8E9;
-}
-.leftItemInfo {
-  display: flex;
-  align-items: center;
-}
-.itemPicture {
-  width: 138px;
-  height: 95px;
-  margin-right: 28px;
-  margin-left: 43px;
-}
-.crossClose {
-  width: 22px;
-  height: 22px;
-}
-.crossClose:hover {
-  cursor: pointer;
+
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__itemPicture {
+    width: 138px;
+    height: 95px;
+    margin-right: 28px;
+    margin-left: 43px;
+  }
+
+  &__crossClose {
+    width: 22px;
+    height: 22px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 </style>

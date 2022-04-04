@@ -1,31 +1,31 @@
 <template>
   <div class="header">
-    <div class="logosWrapper">
-      <div class="leftLogos">
-        <img src="../static/logos/black_logo.png" class="logoImg">
+    <div class="header__logos">
+      <div class="header__leftLogos">
+        <img src="../static/logos/black_logo.png" class="header__logoImg">
         <div>BlackWall Store</div>
       </div>
-      <div class="rightLogos">
-        <div>{{ "₽ " + subtotal }}</div>
-        <NuxtLink to="/cart" class="cartImg">
-          <img v-if="subtotal == 0" src="../static/logos/emptyCart.png" class="emptyCart">
-          <div v-else class="filledCartWrapper">
-            <img src="../static/logos/emptyCart.png" class="filledCart">
-            <div class="redCircle">
-              <img src="../static/logos/redCartCircle.png">
-              <div class="itemCount">{{itemCount}}</div>
+      <div class="header__rightLogos">
+        <div class="header__subtotal">{{ "₽ " + subtotal }}</div>
+        <NuxtLink to="/cart" class="header__cartImg">
+          <img v-if="subtotal == 0" src="../static/logos/emptyCart.png" class="header__cartImg_empty">
+          <div v-else class="header__cartImg_filled">
+            <img src="../static/logos/emptyCart.png" class="header__filledCartImg">
+            <div class="header__redCircle">
+              <img class="header__redCircle__img" src="../static/logos/redCartCircle.png">
+              <div class="header__redCircle__itemCount">{{itemCount}}</div>
             </div>
           </div>
         </NuxtLink>
       </div>
     </div>
-    <div class="menuWrapper">
-      <div class="menu">
-        <div class="menuItem">ГЛАВНАЯ</div>
-        <NuxtLink to="/" class="menuItem">КАТАЛОГ</NuxtLink>
-        <NuxtLink to="/cart" class="menuItem">ДОСТАВКА И ОПЛАТА</NuxtLink>
-        <div class="menuItem">О НАС</div>
-        <div class="menuItem">КОНТАКТЫ</div>
+    <div class="header__menu">
+      <div class="header__menu__content">
+        <div class="header__menu__menuItem">ГЛАВНАЯ</div>
+        <NuxtLink to="/" class="header__menu__menuItem">КАТАЛОГ</NuxtLink>
+        <NuxtLink to="/cart" class="header__menu__menuItem">ДОСТАВКА И ОПЛАТА</NuxtLink>
+        <div class="header__menu__menuItem">О НАС</div>
+        <div class="header__menu__menuItem">КОНТАКТЫ</div>
       </div>
     </div>
   </div>
@@ -41,7 +41,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/main";
 
 .header {
   display: flex;
@@ -50,68 +51,77 @@ export default {
   margin-top: 50px;
   width: 63vw;
   height: 135px;
+  &__logos {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 76px;
+    justify-content: space-between;
+    border-bottom: solid 2px #DBDBDB;
+  }
+  &__leftLogos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 196px;
+    height: 44px;
+    color: black;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    @include _967 {
+      font-size: 16px;
+    }
+    @include _600 {
+      font-size: 14px;
+    }
+    @include _300 {
+      font-size: 10px;
+    }
+  }
+  &__logoImg {
+    height: 100%;
+  }
+  &__rightLogos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 47px;
+    width: 191px;
+    color: black;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+  }
+  &__subtotal {
+    opacity: 0.5;
+  }
+  &__cartImg {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    text-decoration: none;
+    &_empty {
+    height: 24px;
+    width: 24px;
+    margin-right: 25px;
+    margin-top: 15px;
+  }
+    &_filled {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-right: 24px;
+     margin-top: 5px;
+   }
+  }
+  &__filledCartImg {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+  }
 }
-.logosWrapper {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 76px;
-  justify-content: space-between;
-  border-bottom: solid 2px #DBDBDB;
-}
-.leftLogos {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 196px;
-  height: 44px;
-  color: black;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 27px;
-}
-.rightLogos {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 47px;
-  width: 191px;
-  color: black;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
-}
-.rightLogos > div {
-  opacity: 0.5;
-}
-.logoImg {
-  height: 100%;
-}
-.cartImg {
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  text-decoration: none;
-}
-.emptyCart {
-  height: 24px;
-  width: 24px;
-  margin-right: 25px;
-  margin-top: 15px;
-}
-.filledCartWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 24px;
-  margin-top: 5px;
-}
-.filledCart {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-}
-.redCircle {
+.header__redCircle {
   display: flex;
   justify-content: center;
   position: relative;
@@ -119,40 +129,59 @@ export default {
   height: 20px;
   left: 10px;
   bottom: 10px;
+  &__img {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+  }
+  &__itemCount {
+    position: absolute;
+    color: #FFFFFF;
+    font-family: Poppins, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+  }
 }
-.redCircle > img {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-}
-.itemCount {
-  position: absolute;
-  color: #FFFFFF;
-  font-family: Poppins, sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-}
-.menuWrapper {
+
+.header__menu {
   width: 100%;
   margin-top: 29px;
-}
-.menu {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 12%;
-}
-.menuItem {
-  display: flex;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 36px;
-  letter-spacing: 0.03em;
-  font-style: normal;
-  color: #282A2C;
-  text-decoration: none;
-}
-.menuItem:hover {
-  cursor: pointer;
-  color: #33A0FF;
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 12%;
+    @include _967 {
+      margin-right: 0;
+    }
+    @include _600 {
+      margin-right: 0;
+    }
+    @include _300 {
+      margin-right: 0;
+    }
+  }
+  &__menuItem {
+    display: flex;
+    color: $default-black;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: 0.03em;
+    font-style: normal;
+    text-decoration: none;
+    &:hover {
+      cursor: pointer;
+      color: $default-blue;
+    }
+    @include _967 {
+      font-size: 18px;
+    }
+    @include _600 {
+      font-size: 12px;
+    }
+    @include _300 {
+      font-size: 10px;
+    }
+  }
 }
 </style>

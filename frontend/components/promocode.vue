@@ -1,7 +1,7 @@
 <template>
-  <div class="promocodeWrapper">
-    <input class="promocodeInput" type="text" v-model="promocode" @focus="promocode=''">
-    <cart-button message="Применить" class="applyButton"></cart-button>
+  <div class="promocode">
+    <input class="promocode__input" type="text" v-model="promocode" @focus="promocode=''">
+    <cart-button message="Применить" class="promocode__applyButton"></cart-button>
   </div>
 </template>
 
@@ -18,36 +18,54 @@ export default {
 }
 </script>
 
-<style scoped>
-.promocodeWrapper {
+<style lang="scss" scoped>
+@import "../assets/main";
+
+.promocode {
   display: flex;
   justify-content: right;
   align-items: center;
-}
-.promocodeInput {
-  height: 58px;
-  width: 367px;
-  padding: 0 0 0 25px;
-  border: 2px solid #F3F4F5;
-  border-radius: 7px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #A6A6A6;
-}
-.promocodeInput:hover {
-  border: 2px solid #33A0FF;
-}
-.promocodeInput:focus {
-  border: 2px solid #33A0FF;
-  color: #282A2C;
-}
-.applyButton {
-  position: absolute;
-  height: 62px;
-  width: 132px;
-  border-bottom-left-radius: unset;
-  border-top-left-radius: unset;
+  &__input {
+    height: 58px;
+    width: 367px;
+    padding: 0 0 0 25px;
+    border: 2px solid #F3F4F5;
+    border-radius: 7px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #A6A6A6;
+    @include _600 {
+      width: 300px;
+      font-size: 11px;
+    }
+    @include _300 {
+      width: 200px;
+      font-size: 10px;
+    }
+    &:hover {
+      border: 2px solid $default-blue;
+    }
+    &:focus {
+      border: 2px solid $default-blue;
+      color: $default-black;
+    }
+  }
+  &__applyButton {
+    position: absolute;
+    height: 62px;
+    width: 132px;
+    border-bottom-left-radius: unset;
+    border-top-left-radius: unset;
+    @include _600 {
+      width: 75px;
+      font-size: 11px;
+    }
+    @include _300 {
+      width: 60px;
+      font-size: 10px;
+    }
+  }
 }
 </style>

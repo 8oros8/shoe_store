@@ -5,76 +5,77 @@
          @click="modalVisible=false; popupComplete=false">
     </div>
     <div class="popup" v-if="modalVisible && !popupComplete">
-      <div class="closeButton" @click="closePopup" @mouseover="closeButtonActive=true" @mouseout="closeButtonActive=false">
-        <img v-if="!closeButtonActive" src="../static/logos/closePopup.png">
-        <img v-else src="../static/logos/closePopupHover.png">
+      <div class="popup__closeButtonWrapper" @click="closePopup" @mouseover="closeButtonActive=true" @mouseout="closeButtonActive=false">
+        <img class="popup__closeButton" v-if="!closeButtonActive" src="../static/logos/closePopup.png">
+        <img class="popup__closeButton" v-else src="../static/logos/closePopupHover.png">
       </div>
-      <div class="popupHeader">Оформление заказа</div>
-      <div class="popupBody">
+      <div class="popup__header">Оформление заказа</div>
+      <div class="popup__body">
         <customer-input v-for="input of customerInputs"
+                        :key="input.name"
                         :inputHeader="input.name"
                         :inputSample="input.sample"
                         :inputType="input.inputType"
                         @correct="validateInput(input)"
                         @incorrect="devalidateInput(input)"
         ></customer-input>
-        <button class="basicButton" @click="submitOrder">
+        <button class="popup__submitOrder" @click="submitOrder">
           Отправить
         </button>
       </div>
     </div>
     <div class="thanksForOrder" v-if="modalVisible && popupComplete">
-      <div class="closeButton" @click="closePopup" @mouseover="closeButtonActive=true" @mouseout="closeButtonActive=false">
-        <img v-if="!closeButtonActive" src="../static/logos/closePopup.png">
-        <img v-else src="../static/logos/closePopupHover.png">
+      <div class="thanksForOrder__closeButtonWrapper" @click="closePopup" @mouseover="closeButtonActive=true" @mouseout="closeButtonActive=false">
+        <img class="thanksForOrder__closeButton" v-if="!closeButtonActive" src="../static/logos/closePopup.png">
+        <img class="thanksForOrder__closeButton" v-else src="../static/logos/closePopupHover.png">
       </div>
-      <div class="successWrapper">
-        <img class="successIcon" src="../static/logos/successIcon.png">
+      <div class="thanksForOrder__imageWrapper">
+        <img class="thanksForOrder__image" src="../static/logos/successIcon.png">
         Спасибо за заказ!<br>Мы с Вами обязательно свяжемся!
       </div>
     </div>
-    <div class="bodyWrapper">
+    <div class="cartBody">
       <back-button></back-button>
-      <div class="cartHeader">
-        <div class="mainCartHeader">КОРЗИНА</div>
-        <div class="headingsWrapper">
-          <div>ТОВАР</div>
-          <div>ЦЕНА</div>
+      <div class="cartBody__cartHeader">
+        <div class="cartBody__mainHeader">КОРЗИНА</div>
+        <div class="cartBody__subheadingsWrapper">
+          <div class="cartBody__subheading">ТОВАР</div>
+          <div class="cartBody__subheading">ЦЕНА</div>
         </div>
       </div>
       <CartWrapper :items="items" :removeItem="removeItem"></CartWrapper>
-      <div class="bottomCart">
+      <div class="cartBody__bottomCart">
         <Promocode></Promocode>
-        <div class="paymentInfo">
-          <div class="subtotal">
+        <div class="cartBody__paymentInfo">
+          <div class="cartBody__paymentInfo__subtotal">
             <div>
               Промежуточный итог
             </div>
-            <div class="subtotalCount">{{ subtotal.toLocaleString() + ' ₽'}}</div>
+            <div>{{ subtotal.toLocaleString() + ' ₽'}}</div>
           </div>
-          <div class="delivery">
+          <div class="cartBody__paymentInfo__delivery">
             <div>
               Доставка
             </div>
-            <div class="deliveryCount">{{ deliveryCount.toLocaleString() + ' ₽' }}</div>
+            <div>{{ deliveryCount.toLocaleString() + ' ₽' }}</div>
           </div>
-          <div class="coupon">
+          <div class="cartBody__paymentInfo__coupon">
             <div>
               Купон
             </div>
-            <div v-if="promocode === 0" class="couponCount">Нет</div>
-            <div v-else class="couponCount">{{ promocode.toLocaleString() + ' ₽' }}</div>
+            <div v-if="promocode === 0">Нет</div>
+            <div v-else>{{ promocode.toLocaleString() + ' ₽' }}</div>
           </div>
-          <div class="total">
+          <div class="cartBody__paymentInfo__total">
             <div>
               Общая сумма
             </div>
-            <div class="totalCount">{{ total.toLocaleString() + ' ₽'}}</div>
-            <open-popup
-                message="Оформить заказ"
-                class="openPopup"
-                @openPopup="openPopup"></open-popup>
+            <div>{{ total.toLocaleString() + ' ₽'}}</div>
           </div>
+          <open-popup
+              message="Оформить заказ"
+              class="cartBody__openPopup"
+              @openPopup="openPopup"></open-popup>
         </div>
       </div>
     </div>
@@ -162,7 +163,16 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/main";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .modal {
   position: fixed;
   display: flex;
@@ -174,63 +184,72 @@ export default {
   background-color: #bdbdbd;
   opacity: 0.5;
 }
+
 .popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: fixed;
-  bottom: 5%;
+  top: 2%;
+  height: 80vh;
   opacity: 1;
   z-index: 101;
   padding: 48px;
-  width: 30%;
-  height: 80%;
+  width: 60vh;
   background-color: #FFFFFF;
   border-radius: 17px;
+  .popup__body {
+    width: 100%;
+    height: 80%;
+  }
+  .popup__closeButtonWrapper {
+    display: flex;
+    justify-content: right;
+  }
+  .popup__closeButton {
+    height: 25px;
+    width: 25px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .popup__header {
+    display: flex;
+    font-family: 'Poppins', 'OpenSans', sans-serif;
+    margin-top: 7%;
+    margin-bottom: 11%;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 42px;
+    color: #000000;
+  }
+  .popup__submitOrder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+    width: 100%;
+    height: 15%;
+    background-color: $default-blue;
+    color: #FFFFFF;
+    border-radius: 4px;
+    border-width: 0;
+    font-family: Inter, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-blue;
+    }
+    &:active {
+      cursor: pointer;
+      background-color: $active-blue;
+    }
+  }
 }
-.closeButton {
-  display: flex;
-  justify-content: right;
-}
-.closeButton:hover {
-  cursor: pointer;
-}
-.closeButton > img {
-  height: 25px;
-  width: 25px;
-}
-.popupHeader {
-  display: flex;
-  margin-top: 46px;
-  margin-bottom: 70px;
-  font-family: 'Poppins', 'OpenSans', sans-serif;
-  font-weight: 700;
-  font-size: 28px;
-  line-height: 42px;
-  color: #000000;
-}
-.basicButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 32px;
-  width: 100%;
-  height: 48px;
-  background-color: #33A0FF;
-  color: #FFFFFF;
-  border-radius: 4px;
-  border-width: 0;
-  font-family: Inter, sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-}
-.basicButton:hover {
-  cursor: pointer;
-  background-color: #1E96FF;
-}
-.basicButton:active {
-  cursor: pointer;
-  background-color: #1985E3;
-}
+
 .thanksForOrder {
   position: fixed;
   text-align: center;
@@ -242,114 +261,173 @@ export default {
   height: 40%;
   background-color: #FFFFFF;
   border-radius: 17px;
+  @media (max-height: 750px){
+    height: 60%;
+  }
+  .thanksForOrder__closeButtonWrapper {
+    display: flex;
+    justify-content: right;
+  }
+  .thanksForOrder__closeButton {
+    height: 25px;
+    width: 25px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .thanksForOrder__imageWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', 'OpenSans', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 30px;
+    color: $default-black;
+    @include _600 {
+      font-size: 18px;
+    }
+    @include _300 {
+      font-size: 16px;
+    }
+  }
+  .thanksForOrder__image {
+    height: 130px;
+    width: 130px;
+    margin-bottom: 27px;
+  }
 }
-.successWrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', 'OpenSans', sans-serif;
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 30px;
-  color: #282A2C;
-}
-.successIcon {
-  height: 130px;
-  width: 130px;
-  margin-bottom: 27px;
-}
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
-.bodyWrapper {
+
+.cartBody {
   display: flex;
   flex-direction: column;
   margin-top: 62px;
   margin-bottom: 166px;
   width: 63vw;
-}
-.cartHeader {
-  margin-top: 50px;
-}
-.mainCartHeader {
-  margin-bottom: 88px;
-  font-family: 'OpenSans', sans-serif;
-  font-weight: 600;
-  font-size: 28px;
-  line-height: 42px;
-  color: #282A2C;
-}
-.headingsWrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 16px 29px 81px;
-  border-bottom: 2px solid #E8E8E9;
-}
-.headingsWrapper > div {
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  line-height: 24px;
-  color: #444749;
-}
-.bottomCart {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-.paymentInfo {
-  display: flex;
-  flex-direction: column;
-  width: 370px;
-}
-.paymentInfo > div {
-  display: flex;
-  justify-content: space-between;
-}
-.delivery {
-  margin-top: 28px;
-  margin-bottom: 28px;
-}
-.delivery > div {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 21px;
-  color: #262626;
-}
-.coupon > div {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 21px;
-  color: #262626;
-}
-.subtotal > div {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 21px;
-  color: #262626;
-}
-.total > div {
-  font-family: 'Poppins', 'OpenSans', sans-serif;
-  font-weight: 500;
-  font-size: 30px;
-  line-height: 45px;
-  color: #22262A;
-}
-.total {
-  flex-wrap: wrap;
-  margin-top: 59px;
-}
-.openPopup {
-  justify-self: left;
-  margin-top: 24px;
-  width: 100%;
+  .cartBody__cartHeader {
+    margin-top: 50px;
+  }
+  .cartBody__mainHeader {
+    margin-bottom: 88px;
+    font-family: 'OpenSans', sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 42px;
+    color: #282A2C;
+  }
+  .cartBody__subheadingsWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px 29px 81px;
+    border-bottom: 2px solid #E8E8E9;
+  }
+  .cartBody__subheading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    line-height: 24px;
+    color: #444749;
+  }
+  .cartBody__bottomCart {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .cartBody__paymentInfo {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    .cartBody__paymentInfo__total {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 28px;
+      font-family: 'Poppins', 'OpenSans', sans-serif;
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 45px;
+      color: #22262A;
+      @include _967 {
+        font-size: 26px;
+      }
+      @include _600 {
+        font-size: 18px;
+      }
+      @include _300 {
+        font-size: 16px;
+      }
+    }
+    .cartBody__paymentInfo__delivery {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 28px;
+      margin-bottom: 28px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 21px;
+      color: #262626;
+      @include _967 {
+        font-size: 14px;
+      }
+      @include _600 {
+        font-size: 10px;
+      }
+      @include _300 {
+        font-size: 10px;
+      }
+    }
+    .cartBody__paymentInfo__coupon {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid #F6F7F8;
+      padding-bottom: 29px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 21px;
+      color: #262626;
+      @include _967 {
+        font-size: 14px;
+      }
+      @include _600 {
+        font-size: 10px;
+      }
+      @include _300 {
+        font-size: 10px;
+      }
+    }
+    .cartBody__paymentInfo__subtotal {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 21px;
+      color: #262626;
+      @include _967 {
+        font-size: 14px;
+      }
+      @include _600 {
+        font-size: 10px;
+      }
+      @include _300 {
+        font-size: 10px;
+      }
+    }
+  }
+  .cartBody__openPopup {
+    justify-self: left;
+    margin-top: 24px;
+    width: 100%;
+    @include _600 {
+      font-size: 16px;
+    }
+    @include _300 {
+      font-size: 14px;
+    }
+  }
 }
 </style>

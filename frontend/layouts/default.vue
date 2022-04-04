@@ -24,14 +24,9 @@ export default {
 }
 </script>
 
-<style>
-@import "../assets/fonts.css";
-* {
-  font-family: 'Poppins', 'OpenSans', sans-serif;
-}
-body {
-  margin: 0;
-}
+<style lang="scss" scoped>
+@import "../assets/main";
+
 .defaultLayout {
   display: flex;
   flex-direction: column;

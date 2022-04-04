@@ -1,5 +1,5 @@
 <template>
-  <button class="basicButton" @click="$emit('button-pressed')">
+  <button class="addToCartButton" @click="$emit('button-pressed')">
     {{ message }}
   </button>
 </template>
@@ -13,14 +13,16 @@ export default {
 }
 </script>
 
-<style scoped>
-.basicButton {
+<style lang="scss" scoped>
+@import "../assets/main";
+
+.addToCartButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80%;
+  width: 82%;
   height: 48px;
-  background-color: #33A0FF;
+  background-color: $default-blue;
   color: #FFFFFF;
   border-radius: 4px;
   border-width: 0;
@@ -29,13 +31,13 @@ export default {
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-}
-.basicButton:hover {
-  cursor: pointer;
-  background-color: #1E96FF;
-}
-.basicButton:active {
-  cursor: pointer;
-  background-color: #1985E3;
+  &:hover {
+    cursor: pointer;
+    background-color: $hover-blue;
+  }
+  &:active {
+    cursor: pointer;
+    background-color: $active-blue;
+  }
 }
 </style>

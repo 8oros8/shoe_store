@@ -1,8 +1,8 @@
 <template>
-  <div class="productsWrapper">
+  <div class="products">
     <Selector @select="sortItems"
               :selected="selected"></Selector>
-    <div class="productsContainer">
+    <div class="products__content">
       <product-card v-for="item of allItemsList"
                     @add-to-cart="addItem"
                     :product-info="item"
@@ -27,12 +27,14 @@ export default {
 }
 </script>
 
-<style scoped>
-.productsWrapper {
+<style lang="scss" scoped>
+@import "../assets/main";
+
+.products {
   width: 75%;
   margin-bottom: 5%;
 }
-.productsContainer {
+.products__content {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

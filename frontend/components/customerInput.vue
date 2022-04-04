@@ -1,27 +1,27 @@
 <template>
-  <div class="inputsWrapper">
-    <div class="inputHeader">{{inputHeader}}</div>
+  <div class="customerInput">
+    <div class="customerInput__header">{{inputHeader}}</div>
     <input v-if="inputType === 'Number'"
-           class="customerInput"
+           class="customerInput__inputBody"
            id="phoneInput"
            v-model="inputMemory"
            :placeholder="inputSample"
            @blur="checkPhone(inputMemory)">
-    <label v-if="wrongPhone" for="phoneInput" class="formatWarning">Пожалуйста, введите данные в  формате +79998887766</label>
+    <label v-if="wrongPhone" for="phoneInput" class="customerInput_formatWarning">Пожалуйста, введите данные в  формате +79998887766</label>
     <input v-if="inputType === 'Email'"
-           class="customerInput"
+           class="customerInput__inputBody"
            id="emailInput"
            v-model="inputMemory"
            :placeholder="inputSample"
            @blur="checkEmail(inputMemory)">
-    <label v-if="wrongEmail" for="emailInput" class="formatWarning">Пожалуйста, введите данные в  формате info@wall.black</label>
+    <label v-if="wrongEmail" for="emailInput" class="customerInput_formatWarning">Пожалуйста, введите данные в  формате info@wall.black</label>
     <input v-if="inputType === 'Text'"
-           class="customerInput"
+           class="customerInput__inputBody"
            id="nameInput"
            v-model="inputMemory"
            :placeholder="inputSample"
            @blur="checkName(inputMemory)">
-    <label v-if="wrongName" for="nameInput" class="formatWarning">Пожалуйста, введите имя</label>
+    <label v-if="wrongName" for="nameInput" class="customerInput_formatWarning">Пожалуйста, введите имя</label>
   </div>
 </template>
 
@@ -76,45 +76,52 @@ export default {
 }
 </script>
 
-<style scoped>
-.inputsWrapper {
-  margin-top: 16px;
-}
+<style lang="scss" scoped>
+@import "../assets/main";
+
 .customerInput {
-  padding-left: 18px;
-  width: 95%;
-  height: 50px;
-  margin-right: 48px;
-  background-color: #DFDEDE;
-  border-radius: 7px;
-  border: 1px solid #DFDEDE;
-  font-family: 'Poppins', 'OpenSans', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 21px;
-  color: #BEBEBE;
+  height: 20%;
+  margin-top: 7%;
+
+  &__header {
+    margin-bottom: 6px;
+    margin-left: 18px;
+    font-family: 'Poppins', 'OpenSans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #343739;
+  }
+
+  &__inputBody {
+    display: flex;
+    padding-left: 18px;
+    width: 95%;
+    height: 65%;
+    background-color: #DFDEDE;
+    border-radius: 7px;
+    border: 1px solid #DFDEDE;
+    font-family: 'Poppins', 'OpenSans', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #BEBEBE;
+    &:hover {
+      border: 1px solid $default-blue;
+    }
+    &:focus {
+      background-color: #FFFFFF;
+      border: 1px solid $default-blue;
+      color: $default-black;
+    }
+  }
+
+  &_formatWarning {
+    position: absolute;
+    margin-left: 18px;
+    color: red;
+    font-size: 11px;
+  }
 }
-.customerInput:hover {
-  border: 1px solid #33A0FF;
-}
-.customerInput:focus {
-  background-color: #FFFFFF;
-  border: 1px solid #33A0FF;
-  color: #282A2C;
-}
-.inputHeader {
-  margin-bottom: 6px;
-  margin-left: 18px;
-  font-family: 'Poppins', 'OpenSans', sans-serif;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 21px;
-  color: #343739;
-}
-.formatWarning {
-  position: absolute;
-  margin-left: 18px;
-  color: red;
-  font-size: 11px;
-}
+
 </style>
